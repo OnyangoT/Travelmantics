@@ -4,4 +4,6 @@
     <string name="deal_price">Price</string>
     <string name="deal_description">Description</string>
     <string name="save_menu">Save</string>
+    <string name="new_travel_deal">New Travel Deal</string>
+    <string name="delete_deal">Delete Deal</string>
 </resources>
