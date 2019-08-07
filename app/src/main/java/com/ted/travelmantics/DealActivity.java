@@ -28,7 +28,7 @@ public class DealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-        FirebaseUtil.openFbReference("traveldeals");
+        //FirebaseUtil.openFbReference("traveldeals");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         textTitle = (EditText) findViewById(R.id.text_title);
@@ -56,7 +56,7 @@ public class DealActivity extends AppCompatActivity {
                 clean();
                 backToList();
                 return true;
-            case R.id.delete_deal:
+            case R.id.delete_deal_menu:
                 deleteDeal();
                 Toast.makeText(this, "Deal deleted sucessfully", Toast.LENGTH_LONG).show();
                 backToList();
@@ -105,6 +105,22 @@ public class DealActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);
+        if (FirebaseUtil.isAdmin = true) {
+            menu.findItem(R.id.delete_deal_menu).setVisible(true);
+            menu.findItem(R.id.save_menu).setVisible(true);
+            enableEditTexts(true);
+        }
+        else {
+            menu.findItem(R.id.delete_deal_menu).setVisible(false);
+            menu.findItem(R.id.save_menu).setVisible(false);
+            enableEditTexts(false);
+        }
         return true;
+    }
+
+    private void enableEditTexts(boolean isEnabled) {
+        textTitle.setEnabled(isEnabled);
+        textDescription.setEnabled(isEnabled);
+        textPrice.setEnabled(isEnabled);
     }
 }
